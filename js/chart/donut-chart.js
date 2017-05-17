@@ -91,7 +91,7 @@ function DonutChart(options) {
   $$.onMouseOver = function (data) {
     var container = "chart-right";
     var width = document.getElementById(container).parentElement.clientWidth;
-    var height = width * 0.75;
+    var height = width * 0.6;
     var options = new Options({
       height: height,
       width: width,

@@ -302,7 +302,8 @@ body {
 
   line-height: 1;
   color: #522f94;
-  border: 1px solid #8c8c8c;
+  border: 1px solid #BEBDBF;
+  background: white;
 }
 
 /* Creates a small triangle extender for the tooltip */
@@ -316,7 +317,6 @@ body {
   position: absolute;
   text-align: center;
 }
-
 
 /* Style northward tooltips differently */
 .d3-tip.n:after {
@@ -334,7 +334,7 @@ td:nth-child(even) {
   text-align: end;
 }
 
-tr:nth-child(even) > td{
+tr:nth-child(even) > td {
   border: 1px solid #adadad;
   border-collapse: collapse;
 }
@@ -367,12 +367,14 @@ h5.timeline-title {
   padding: 10px;
 }
 
-.axis path{
-  stroke: #c6e7ec;
+.axis path {
+  stroke: #d2ecf0;
 }
+
 .axis {
   font-family: Roboto;
 }
 
-ul {
+.tick > text {
+  fill: #BEBDBF;
 }

@@ -16,13 +16,18 @@ function Axis(owner, data, xAxisData, yAxisData, type) { //TODO define types of 
     $$.xAxis = d3.select(asClass('line-chart'))
       .append("g")
       .attr("class", "axis axis--x")
-      .attr("transform", "translate(0," + $$.height + ")")
-      .call(d3.axisBottom($$.xScale));
+      .attr("transform", "translate(-5," + $$.height + 5 + ")")
+      .call(d3.axisBottom($$.xScale))
+      .selectAll('.tick')
+      .selectAll('line').remove();
 
     $$.yAxis = d3.select(asClass('line-chart'))
       .append("g")
       .attr("class", "axis axis--y")
-      .call(d3.axisLeft($$.yScale));
+      .attr("transform", "translate(-5, 0)")
+      .call(d3.axisLeft($$.yScale))
+      .selectAll('.tick')
+      .selectAll('line').remove();
 
     __.drawGird();
   };
@@ -31,7 +36,7 @@ function Axis(owner, data, xAxisData, yAxisData, type) { //TODO define types of 
 
     // method to calculate x position
     var x = function (d) {
-      return $$.xScale(d) + $$.xScale.bandwidth() / 2;
+      return $$.xScale(d) + $$.xScale.bandwidth() / 2 + 5;
     };
 
     // method calculate y position
