@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Retail AI</title>
+ <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="js/d3.tip.js"></script>
+  <script src="js/utils/helpers.js"></script>
+  <script src="js/utils/options.js"></script>
+  <script src="js/components/axis.js"></script>
+  <script src="js/components/tooltip.js"></script>
+  <script src="js/chart/line-chart.js"></script>
+  <script src="js/chart/donut-chart.js"></script>
+  <script src="js/chart.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="page-header">
+  </div>
+  <ul class="timeline">
+
+    <li class="timeline">
+      <div class="timeline-panel">
+        <div class="timeline-body">
+          <svg id="chart-left">
+
+          </svg>
+        </div>
+      </div>
+    </li>
+    <li class="timeline-inverted">
+      <div class="timeline-badge danger"><i class="fa fa-microphone"></i></div>
+      <div class="timeline-panel chart-right-panel">
+        <div class="timeline-heading">
+          <h5 class="timeline-title">Week-by-Week Deviation from Planned Sales by Master Style</h5>
+        </div>
+        <div class="timeline-body chart-right-body">
+          <svg id="chart-right">
+
+          </svg>
+        </div>
+      </div>
+    </li>
+    <li class="panel-question">
+      <input id="btn-input" type="text" class="form-control input-sm" placeholder="Ask your question here "/>
+    </li>
+
+  </ul>
+</div>
+
+
+</body>
+</html>
