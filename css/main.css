@@ -414,3 +414,11 @@ g.infowin text,
   font: 11px sans-serif;
   fill:grey;
 }
+
+#bar-chart .tick line{
+  display: none;
+}
+
+#bar-chart .axis line {
+  stroke: #d2ecf0;
+}
