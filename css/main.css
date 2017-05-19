@@ -40,9 +40,10 @@ line.horizontal-grid {
 .d3-tip {
 
   line-height: 1;
-  color: #522f94;
+  color: rgba(0, 0, 0, 0.8);
   border: 1px solid #BEBDBF;
   background: white;
+  color: #838087;
 }
 
 /* Creates a small triangle extender for the tooltip */
@@ -65,7 +66,8 @@ line.horizontal-grid {
 }
 
 tr:nth-child(even) {
-  border: 1px solid #adadad;
+  border-top: 1px solid #BEBDBF;
+  border-bottom: 1px solid #BEBDBF;
   border-collapse: collapse;
 }
 
@@ -74,7 +76,8 @@ td:nth-child(even) {
 }
 
 tr:nth-child(even) > td {
-  border: 1px solid #adadad;
+  border-top: 1px solid #BEBDBF;
+  border-bottom: 1px solid #BEBDBF;
   border-collapse: collapse;
 }
 
@@ -526,4 +529,37 @@ g.infowin text,
 .last ul {
   font-size: 10px !important;
   color: #838087 !important;
+}
+
+table {
+  table-layout: fixed;
+}
+
+td {
+  width: 50%
+}
+
+/*special tooltip*/
+.special-tooltip {
+  color: #42b548 !important;
+  font-size: 12px !important;
+}
+
+.special-tooltip span{
+  color: #838087 !important;
+}
+
+.special-tooltip td{
+  border: 0px !important;
+  width: auto !important;
+  height: 30px !important;
+}
+
+.special-tooltip tr{
+  border: 0px !important;
+}
+.special-tooltip tr:nth-child(even){
+  border-bottom: 1px solid #BEBDBF !important;
+  border-top: 1px solid #BEBDBF !important;
+  border-collapse: collapse;
 }

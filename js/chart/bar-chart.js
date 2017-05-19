@@ -36,6 +36,8 @@ window.onload = function () {
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  var $$ = this;
+
   d3.json("data/retail-data.json", function (error, data) {
 
     data.forEach(function (d) {
@@ -44,6 +46,11 @@ window.onload = function () {
       var largestDeviationIdx = getLargetDeviaton(predictedData, actualData);
       d.deviation = actualData[largestDeviationIdx] - predictedData[largestDeviationIdx];
     });
+
+    $$.data = data;
+    var tooltip = new Tooltip($$);
+    tooltip.createTooltip(data[0]);
+    svg.call($$.tip);
 
     var horizontalGridData = y.ticks(11) // exclude the zero
 
@@ -101,7 +108,7 @@ window.onload = function () {
 
     verticalGridLines
       .attr("x1", function (d) {
-        return x(d) ;
+        return x(d);
       })
       .attr("x2", function (d) {
         return x(d);
@@ -117,7 +124,6 @@ window.onload = function () {
       .data(data)
       .enter().append("rect")
       .attr("class", function (d) {
-        console.log('d');
         if (d.deviation < 0) {
           return "bar negative";
         } else {
@@ -146,17 +152,47 @@ window.onload = function () {
       .attr("x", function (d, i) {
         return x(Math.abs(d.deviation));
       })
-      .attr("width", 5)
+      .attr("width", x.bandwidth() / 2)
       .attr("height", function (d) {
         return Math.abs(y(d.deviation) - y(0));
       })
       .on("mouseover", function (d) {
-        d3.select("#_yr")
-          .text("Product: " + d.productName);
-        d3.select("#degrree")
-          .text(d.deviation + "%");
+        $$.data = d;
+        tooltip.updateTooltip(getTooltipHtml());
+        d3.selectAll('rect').classed('hovered', true);
+        d3.select(this).classed('hovered', false);
+        d3.select(this)
+          .transition()
+          .duration(400)
+          .attr("width", x.bandwidth() / 2 + 4)
+          .attr("x", function (d, i) {
+            return x(Math.abs(d.deviation)) - 2;
+          });
+        $$.tip.show();
+      })
+      .on("mouseout", function (d) {
+        d3.selectAll('rect').classed('hovered', false);
+        d3.select(this)
+          .transition()
+          .duration(400)
+          .attr("width", x.bandwidth() / 2)
+          .attr("x", function (d, i) {
+            return x(Math.abs(d.deviation));
+          });
+        $$.tip.hide();
       });
 
+    function getTooltipHtml() {
+      var innerHtml = "<table class='special-tooltip'>";
+      innerHtml += "<tr>" + "<td></td><td><b>" + $$.data.productName + "</b></td></tr>";
+      innerHtml += "<tr>" + "<td><span>Contribution</span></td><td><b>" + $$.data.actualContribution
+        + "</b>%</td></tr>";
+      innerHtml += "<tr>" + "<td><span>Deviation</span></td><td> <b> " +
+        $$.data.deviation
+        + "</b>%</tr>";
+      innerHtml += "</table>";
+      return innerHtml;
+    };
     svg.append("g")
       .attr("class", "y axis")
       .attr("transform", "translate(-5, 15)")

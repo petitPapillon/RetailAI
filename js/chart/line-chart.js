@@ -38,6 +38,7 @@ function LineChart(options) {
 
   $$.updateData = function (data) {
     $$.data = data;
+    // $$.tooltip.updateTooltip();
     $$.draw();
   };
 

@@ -93,9 +93,9 @@ function DonutChart(options) {
     innerHtml += "<tr>" + "<td><img style='width: 50px;height: 50px;' src='data/Screenshot_1.png' /></td><td><b>"
       + $$.data.productName + "</b></td></tr>";
     innerHtml += "<tr>" + "<td  colspan='2' style='text-align: center'><span>Contribution</span></td></tr>";
-    innerHtml += "<tr>" + "<td><p><b>%" + actualData[largestDeviationIdx]
-      + "</b</b></p><span>Actual</span> </td> <td><p><b>%" +
-      predictedData[largestDeviationIdx] +"</b></p> <span>Planned</span> </td></tr>";
+    innerHtml += "<tr>" + "<td><p><b>%" + $$.data.actualContribution
+      + "</b></p><span>Actual</span> </td> <td><p><b>%" +
+      $$.data.plannedContribution +"</b></p> <span>Planned</span> </td></tr>";
     innerHtml += "</table>";
 
     // innerHtml = "<div><span>Total Sales</span><p>$" + $$.data.profit + "</p></div>"
