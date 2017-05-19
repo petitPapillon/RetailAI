@@ -11,16 +11,17 @@ function LineChart(options) {
   $$.padding_top = $$.options.padding_top;
   $$.property = $$.options.property;
 
-  $$.width = $$.width - $$.yAxisWidth - $$.padding_left;
+  $$.width = $$.width - $$.yAxisWidth * 2 - $$.padding_left;
   $$.height = $$.height - $$.xAxisHeight;
 
   $$.mainContainer = d3.select(asId($$.container))
     .attr("width", $$.width + $$.yAxisWidth)
-    .attr("height", $$.height + $$.xAxisHeight);
+    .attr("height", $$.height + $$.xAxisHeight)
+    .attr("transform", "translate(5, 0)");
 
   $$.width -= $$.padding_left;
   $$.height -= $$.padding_top;
-  var translateLeft = 2 * $$.yAxisWidth;
+  var translateLeft = $$.yAxisWidth;
   var translateTop = $$.padding_top / 2;
 
   $$.tooltip = new Tooltip($$);

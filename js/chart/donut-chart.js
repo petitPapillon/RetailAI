@@ -12,9 +12,6 @@ function DonutChart(options) {
   $$.property = $$.options.property;
   $$.data = $$.allData[0];
 
-  $$.tooltip = new Tooltip($$);
-  $$.tooltip.createTooltip();
-
 
   $$.draw = function () {
     var onElementFocused = function (d, i) {
@@ -28,10 +25,8 @@ function DonutChart(options) {
         .select('path')
         .attr('d', arr);
       $$.data = $$.allData[i];
-      $$.tip.show();
-      $$.tip
-        .offset([-10, -10]);
       $$.onMouseOver($$.data);
+      $$.updateInnerInfo();
     };
 
     var onElementOut = function (d) {
@@ -39,7 +34,7 @@ function DonutChart(options) {
       d3.select(this)
         .select('path')
         .attr('d', $$.arc);
-      $$.tip.hide();
+      document.getElementById('donut-info').parentNode.removeChild(document.getElementById('donut-info'));
     };
 
     $$.arc = d3.arc()
@@ -60,7 +55,6 @@ function DonutChart(options) {
       .append("g")
       .attr("transform", "translate(" + $$.width * 0.5 + "," + $$.height / 2 + ")");
 
-    $$.svgChart.call($$.tip);
     $$.arcs = $$.svgChart.selectAll(asClass("arc"))
       .data(pie($$.allData))
       .enter()
@@ -86,6 +80,30 @@ function DonutChart(options) {
 
   $$.changeData = function () {
 
+  };
+
+  $$.updateInnerInfo = function () {
+    var predictedData =  $$.data['sales'].predicted;
+    var actualData = $$.data['sales'].actual;
+    var dates =  $$.data['sales'].dates;
+    var largestDeviationIdx = getLargetDeviaton(predictedData, actualData);
+
+    var innerHtml = "<table>";
+    innerHtml += "<tr><td colspan='2' style='text-align: center'> <span>Total Sales</span><p>$"+ $$.data.profit+"</p></td></tr>"
+    innerHtml += "<tr>" + "<td><img style='width: 50px;height: 50px;' src='data/Screenshot_1.png' /></td><td>"
+      + $$.data.productName + "</td></tr>";
+    innerHtml += "<tr>" + "<td  colspan='2' style='text-align: center'><span>Contribution</span></td></tr>";
+    innerHtml += "<tr>" + "<td><p>%" + actualData[largestDeviationIdx]
+      + "</p><span>Actual</span> </td> <td><p>%" +
+      predictedData[largestDeviationIdx] +"</p> <span>Planned</span> </td></tr>";
+    innerHtml += "</table>";
+
+    // innerHtml = "<div><span>Total Sales</span><p>$" + $$.data.profit + "</p></div>"
+    // innerHtml += "<img style='width: 50px;height: 50px;' src='data/Screenshot_1.png' />" + $$
+    var div = document.getElementById('donut-info') || document.createElement('div');
+    div.setAttribute('id', 'donut-info');
+    div.innerHTML = innerHtml;
+    document.getElementById($$.container).parentNode.appendChild(div);
   };
 
   $$.onMouseOver = function (data) {

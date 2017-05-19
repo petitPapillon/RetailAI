@@ -13,7 +13,7 @@
   },
   {
     "id": 2,
-    "productName": "Swimsuit",
+    "productName": "Tropical Bralette",
     "profit": 12000,
     "actualContribution" : 5.8,
     "plannedContribution": 3.4,
@@ -25,7 +25,7 @@
   },
   {
     "id": 3,
-    "productName": "Golf Skort",
+    "productName": "Tropical Bralette",
     "profit": 9000,
     "actualContribution" : 6,
     "plannedContribution": 4.7,
@@ -37,7 +37,7 @@
   },
   {
     "id": 4,
-    "productName": "Sneakers",
+    "productName": "Tropical Bralette",
     "profit": 20000,
     "actualContribution" : 9,
     "plannedContribution": 8.6,
