@@ -89,13 +89,13 @@ function DonutChart(options) {
     var largestDeviationIdx = getLargetDeviaton(predictedData, actualData);
 
     var innerHtml = "<table>";
-    innerHtml += "<tr><td colspan='2' style='text-align: center'> <span>Total Sales</span><p>$"+ $$.data.profit+"</p></td></tr>"
-    innerHtml += "<tr>" + "<td><img style='width: 50px;height: 50px;' src='data/Screenshot_1.png' /></td><td>"
-      + $$.data.productName + "</td></tr>";
+    innerHtml += "<tr><td colspan='2' style='text-align: center'> <span>Total Sales</span><p><b>$"+ $$.data.profit+"</b></p></td></tr>"
+    innerHtml += "<tr>" + "<td><img style='width: 50px;height: 50px;' src='data/Screenshot_1.png' /></td><td><b>"
+      + $$.data.productName + "</b></td></tr>";
     innerHtml += "<tr>" + "<td  colspan='2' style='text-align: center'><span>Contribution</span></td></tr>";
-    innerHtml += "<tr>" + "<td><p>%" + actualData[largestDeviationIdx]
-      + "</p><span>Actual</span> </td> <td><p>%" +
-      predictedData[largestDeviationIdx] +"</p> <span>Planned</span> </td></tr>";
+    innerHtml += "<tr>" + "<td><p><b>%" + actualData[largestDeviationIdx]
+      + "</b</b></p><span>Actual</span> </td> <td><p><b>%" +
+      predictedData[largestDeviationIdx] +"</b></p> <span>Planned</span> </td></tr>";
     innerHtml += "</table>";
 
     // innerHtml = "<div><span>Total Sales</span><p>$" + $$.data.profit + "</p></div>"

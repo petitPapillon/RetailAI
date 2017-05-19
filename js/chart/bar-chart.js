@@ -25,9 +25,9 @@ window.onload = function () {
     .domain([50, 0])
     .range([0, width]);
 
-  var xAxis = d3.axisBottom(xAxisScale);
+  var xAxis = d3.axisBottom(xAxisScale).ticks(3);
 
-  var xTopAxis = d3.axisTop(xAxisScale);
+  var xTopAxis = d3.axisTop(xAxisScale).ticks(3);
 
   var yAxis = d3.axisLeft(y);
 
@@ -44,6 +44,74 @@ window.onload = function () {
       var largestDeviationIdx = getLargetDeviaton(predictedData, actualData);
       d.deviation = actualData[largestDeviationIdx] - predictedData[largestDeviationIdx];
     });
+
+    var horizontalGridData = y.ticks(11) // exclude the zero
+
+    // set the horizontal Grid Lines -> binding with the data
+    var horizontalGridLines = svg
+      .selectAll("line.horizontal-grid")
+      .data(horizontalGridData);
+
+    horizontalGridLines
+      .enter()
+      .append("line")
+      .attr("class", "horizontal-grid");
+    // exclude the unnecessary lines
+    horizontalGridLines
+      .exit()
+      .remove();
+
+    // important after update of the data -> select the current lines
+    horizontalGridLines = svg
+      .selectAll("line.horizontal-grid");
+
+    horizontalGridLines
+      .attr("x1", 0)
+      .attr("x2", width)
+      .attr("y1", function (d) {
+        return y(d) + 15;
+      })
+      .attr("y2", function (d) {
+        return y(d) + 15;
+      })
+      .attr("fill", "none")
+      .attr("shape-rendering", "crispEdges")
+      .attr("stroke-width", "1px")
+      .attr("stroke-dasharray", "2,2");
+
+    var verticalGridData = [-5, 20, 40, 50];
+
+    // set the vertical Grid Lines -> binding with the data
+    var verticalGridLines = svg
+      .selectAll("line.vertical-grid")
+      .data(verticalGridData);
+
+    verticalGridLines
+      .enter()
+      .append("line")
+      .attr("class", "vertical-grid");
+    // exclude the unnecessary lines
+    verticalGridLines
+      .exit()
+      .remove();
+
+    // important after update of the data -> select the current lines
+    verticalGridLines = svg
+      .selectAll("line.vertical-grid");
+
+    verticalGridLines
+      .attr("x1", function (d) {
+        return x(d) ;
+      })
+      .attr("x2", function (d) {
+        return x(d);
+      })
+      .attr("y1", 15)
+      .attr("y2", height - 5)
+      .attr("fill", "none")
+      .attr("shape-rendering", "crispEdges")
+      .attr("stroke-width", "1px")
+      .attr("stroke-dasharray", "2,2");
 
     svg.selectAll(asClass("bar"))
       .data(data)
@@ -69,9 +137,9 @@ window.onload = function () {
       .attr("y", function (d) {
 
         if (d.deviation > 0) {
-          return y(d.deviation);
+          return y(d.deviation) + 15;
         } else {
-          return y(0);
+          return y(0) + 15;
         }
 
       })
@@ -91,7 +159,7 @@ window.onload = function () {
 
     svg.append("g")
       .attr("class", "y axis")
-      .attr("transform", "translate(0, 15)")
+      .attr("transform", "translate(-5, 15)")
       .call(yAxis);
 
     // svg.append("g")
@@ -113,8 +181,8 @@ window.onload = function () {
     svg.append("g")
       .attr("class", "x axis")
       .append("line")
-      .attr("y1", y(0))
-      .attr("y2", y(0))
+      .attr("y1", y(0) + 15)
+      .attr("y2", y(0) + 15)
       .attr("x2", width);
 
     // svg.append("g")

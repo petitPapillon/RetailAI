@@ -72,8 +72,7 @@ function Axis(owner, data, xAxisData, yAxisData, type) { //TODO define types of 
       .attr("fill", "none")
       .attr("shape-rendering", "crispEdges")
       .attr("stroke-width", "1px")
-      .attr("stroke-dasharray", "2,2")
-      .attr("stroke", "black");
+      .attr("stroke-dasharray", "2,2");
 
     var verticalGridData = $$.xDomain;
 
@@ -103,7 +102,6 @@ function Axis(owner, data, xAxisData, yAxisData, type) { //TODO define types of 
       .attr("fill", "none")
       .attr("shape-rendering", "crispEdges")
       .attr("stroke-width", "1px")
-      .attr("stroke-dasharray", "2,2")
-      .attr("stroke", "black");
+      .attr("stroke-dasharray", "2,2");
   };
 };
